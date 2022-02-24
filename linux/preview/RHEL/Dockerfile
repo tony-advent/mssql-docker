@@ -29,7 +29,7 @@ RUN REPOLIST=rhel-7-server-rpms,packages-microsoft-com-mssql-server-2017,package
     curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server-2017.repo && \
     curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
     
-RUN yum install -y --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs mssql-server
+RUN ACCEPT_EULA=Y yum install -y --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs mssql-server
  
 RUN yum install -y mssql-tools unixODBC-devel
 
