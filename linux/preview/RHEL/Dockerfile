@@ -36,6 +36,8 @@ COPY uid_entrypoint /opt/mssql-tools/bin/
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
 RUN mkdir -p /var/opt/mssql/data && \
     chmod -R g=u /var/opt/mssql /etc/passwd
+    
+RUN yum -y install mssql-server-fts    
 
 ### Containers should not run as root as a good practice
 USER 10001
@@ -50,6 +52,5 @@ ENTRYPOINT [ "uid_entrypoint" ]
 # Run SQL Server process
 CMD sqlservr
 
-RUN yum -y install mssql-server-fts
 
-RUN systemctl restart mssql-server
+
