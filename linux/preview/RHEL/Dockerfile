@@ -27,17 +27,24 @@ COPY licenses /licenses
 # Install latest mssql-server package
 RUN REPOLIST=rhel-7-server-rpms,packages-microsoft-com-mssql-server-2017,packages-microsoft-com-prod && \
     curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server-2017.repo && \
-    curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo && \
-    ACCEPT_EULA=Y yum -y install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs \
-      mssql-server mssql-tools unixODBC-devel && \
-    yum clean all
+    curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
+    
+RUN yum install -y --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs     
+
+RUN yum install -y mssql-server
+ 
+RUN yum install -y mssql-tools unixODBC-devel
 
 COPY uid_entrypoint /opt/mssql-tools/bin/
+
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+
 RUN mkdir -p /var/opt/mssql/data && \
     chmod -R g=u /var/opt/mssql /etc/passwd
     
 RUN yum -y install mssql-server-fts    
+
+RUN yum clean all
 
 ### Containers should not run as root as a good practice
 USER 10001
@@ -48,8 +55,11 @@ EXPOSE 1433
 VOLUME /var/opt/mssql/data
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
+
 ENTRYPOINT [ "uid_entrypoint" ]
+
 # Run SQL Server process
+
 CMD sqlservr
 
 
