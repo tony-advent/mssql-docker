@@ -28,7 +28,11 @@ RUN yum install -y mssql-server
 
 RUN yum install -y mssql-server-fts
 
-RUN ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
+RUN ACCEPT_EULA=y yum install msodbcsql18
+
+RUN ACCEPT_EULA=Y yum install -y mssql-tools18 
+
+RUN yum install -y unixODBC-devel
 
 COPY uid_entrypoint /opt/mssql-tools/bin
 
@@ -36,7 +40,7 @@ ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
 
 RUN mkdir -p /var/opt/mssql/data
 
-RUN chmod -R g=u /var/opt/mssql
+RUN chmod -R g=u /var/opt/mssql /etc/password
 
 RUN yum clean all
 
