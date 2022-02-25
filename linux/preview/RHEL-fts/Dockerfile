@@ -16,8 +16,6 @@ RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/r
 
 RUN yum install -y mssql-server
 
-RUN yum install -y mssql-server-ha
-
 RUN yum install -y mssql-server-fts
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
