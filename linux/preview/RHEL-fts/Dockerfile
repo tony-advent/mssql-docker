@@ -28,9 +28,7 @@ RUN yum install -y mssql-server
 
 RUN yum install -y mssql-server-fts
 
-RUN yum install -y mssql-tools
-
-RUN yum install -y unixODBC-devel
+RUN yum install -y mssql-tools unixODBC-devel
 
 COPY uid_entrypoint /opt/mssql-tools/bin
 
