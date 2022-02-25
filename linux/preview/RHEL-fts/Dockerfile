@@ -4,6 +4,16 @@
 
 FROM registry.access.redhat.com/ubi8
 
+LABEL name="microsoft/mssql-server-linux" \
+      vendor="Microsoft" \
+      run='docker run --name ${name} \
+         -e ACCEPT_EULA=Y \
+         -e MSSQL_SA_PASSWORD=yourStrong@Password \
+         -p 1433:1433 \
+         -d ${IMAGE}' \
+      io.openshift.description="MS SQL Server" \
+      io.openshift.display-name="MS SQL Server"
+
 USER root
 
 # Install prerequistes since it is needed to get repo config for SQL server
@@ -24,6 +34,7 @@ RUN mkdir -p /var/opt/mssql/data
 
 RUN chmod -R g=u /var/opt/mssql
 
+RUN yum clean all
 
 USER 10001
 
@@ -31,4 +42,4 @@ EXPOSE 1433
 
 VOLUME /var/opt/mssql/data
 
-CMD sqlservr
+CMD /opt/mssql/bin/sqlservr
