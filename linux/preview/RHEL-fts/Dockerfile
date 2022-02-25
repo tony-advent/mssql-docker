@@ -28,7 +28,7 @@ RUN yum install -y mssql-server
 
 RUN yum install -y mssql-server-fts
 
-RUN ACCEPT_EULA=Y yum install msodbcsql18
+RUN ACCEPT_EULA=Y yum -y install msodbcsql18
 
 RUN ACCEPT_EULA=Y yum install -y mssql-tools18 
 
