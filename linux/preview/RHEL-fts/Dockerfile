@@ -16,3 +16,21 @@ RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/r
 
 RUN yum install -y mssql-server
 
+RUN yum install -y mssql-server-ha
+
+RUN yum install -y mssql-server-fts
+
+ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+
+RUN mkdir -p /var/opt/mssql/data
+
+RUN chmod -R g=u /var/opt/mssql /etc/password
+
+
+USER 10001
+
+EXPOSE 1433
+
+VOLUME /var/opt/mssql/data
+
+CMD sqlservr
