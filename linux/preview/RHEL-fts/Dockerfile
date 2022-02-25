@@ -28,7 +28,7 @@ RUN yum install -y mssql-server
 
 RUN yum install -y mssql-server-fts
 
-RUN yum install -y mssql-tools unixODBC-devel
+RUN ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
 
 COPY uid_entrypoint /opt/mssql-tools/bin
 
@@ -45,5 +45,9 @@ USER 10001
 EXPOSE 1433
 
 VOLUME /var/opt/mssql/data
+
+### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
+
+ENTRYPOINT [ "uid_entrypoint" ]
 
 CMD /opt/mssql/bin/sqlservr
