@@ -34,7 +34,7 @@ RUN ACCEPT_EULA=Y yum install -y mssql-tools18
 
 RUN yum install -y unixODBC-devel
 
-COPY uid_entrypoint /opt/mssql-tools/bin
+COPY uid_entrypoint /opt/mssql-tools18/bin
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools18/bin
 
