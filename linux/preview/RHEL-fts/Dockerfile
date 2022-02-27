@@ -34,7 +34,7 @@ RUN ACCEPT_EULA=Y yum install -y mssql-tools18
 
 RUN yum install -y unixODBC-devel
 
-COPY uid_entrypoint /opt/mssql-tools18/bin
+# COPY uid_entrypoint /opt/mssql-tools18/bin
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools18/bin
 
@@ -54,6 +54,6 @@ VOLUME /var/opt/mssql/data
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
 
-ENTRYPOINT [ "uid_entrypoint" ]
+# ENTRYPOINT [ "uid_entrypoint" ]
 
 CMD /opt/mssql/bin/sqlservr
