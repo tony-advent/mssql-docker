@@ -26,7 +26,7 @@ RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/r
 
 RUN yum install -y mssql-server
 
-RUN yum install -y mssql-server-fts
+# RUN yum install -y mssql-server-fts
 
 RUN ACCEPT_EULA=Y yum install -y msodbcsql18
 
@@ -42,6 +42,8 @@ RUN chmod -R g=u /var/opt/mssql /etc/passwd
 
 COPY uid_entrypoint /opt/mssql-tools18/bin
 
+RUN chmod 755 /opt/mssql-tools18/bin/uid_entrypoint
+
 RUN yum clean all
 
 USER 10001
@@ -54,6 +56,6 @@ VOLUME /var/opt/mssql/data
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
 
-# ENTRYPOINT [ "uid_entrypoint" ]
+ENTRYPOINT [ "uid_entrypoint" ]
 
 CMD /opt/mssql/bin/sqlservr
