@@ -36,7 +36,7 @@ RUN yum install -y unixODBC-devel
 
 COPY uid_entrypoint /opt/mssql-tools/bin
 
-ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools18/bin
 
 RUN mkdir -p /var/opt/mssql/data
 
