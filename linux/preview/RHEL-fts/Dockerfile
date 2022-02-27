@@ -20,6 +20,8 @@ USER root
 
 RUN yum -y update
 
+RUN yum install -y sudo
+
 RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/8/mssql-server-2019.repo
 
 RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
