@@ -26,7 +26,7 @@ RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/r
 
 RUN yum install -y mssql-server
 
-RUN yum install -y mssql-server-fts
+# RUN yum install -y mssql-server-fts
 
 RUN ACCEPT_EULA=Y yum install -y msodbcsql18
 
@@ -45,6 +45,8 @@ RUN chmod -R g=u /var/opt/mssql /etc/passwd
 RUN yum clean all
 
 USER 10001
+
+# Default SQL Server TCP/Port
 
 EXPOSE 1433
 
