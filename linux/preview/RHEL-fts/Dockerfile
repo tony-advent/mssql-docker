@@ -26,6 +26,10 @@ RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/co
 
 RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
 
+RUN useradd -M -s /bin/bash -u 10001 -g 0 mssql
+
+RUN mkdir -p -m 770 /var/opt/mssql && chgrp -R 0 /var/opt/mssql
+
 RUN yum install -y mssql-server
 
 # RUN yum install -y mssql-server-fts
@@ -48,9 +52,6 @@ RUN chmod 755 /opt/mssql-tools18/bin/uid_entrypoint
 
 RUN yum clean all
 
-RUN useradd -M -s /bn/bash -u 10001 -g 0 mssql
-
-RUN mkdir -p -m 770 /var/opt/mssql && chgrp -R 0 /var/opt/mssql
 
 # Grant sql the permissions to connect to ports <1024 as a non-root user
 #
