@@ -2,7 +2,7 @@
 
 # Base OS layer: Red Hat 8 ubi
 
-FROM https://mcr.microsoft.com/mssql/rhel/server:2019-CU15-rhel-8
+FROM mcr.microsoft.com/mssql/rhel/server:2019-latest
 
 USER root
 
