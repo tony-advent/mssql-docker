@@ -25,15 +25,15 @@ RUN curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/r
 
 RUN yum install -y mssql-server-fts
 
-# RUN ACCEPT_EULA=Y yum install -y msodbcsql18
+RUN ACCEPT_EULA=Y yum install -y msodbcsql18
 
-# RUN ACCEPT_EULA=Y yum install -y mssql-tools18 
+RUN ACCEPT_EULA=Y yum install -y mssql-tools18 
 
-# RUN yum install -y unixODBC-devel
+RUN yum install -y unixODBC-devel
 
-# ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools18/bin
+ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools18/bin
 
-# RUN mkdir -p /var/opt/mssql/data
+RUN mkdir -p /var/opt/mssql/data
 
 # RUN chmod -R g=u /var/opt/mssql /etc/passwd
 
