@@ -48,7 +48,22 @@ RUN chmod 755 /opt/mssql-tools18/bin/uid_entrypoint
 
 RUN yum clean all
 
-USER 10001
+RUN useradd -M -s /bn/bash -u 10001 -g 0 mssql
+
+RUN mkdir -p -m 770 /var/opt/mssql && chgrp -R 0 /var/opt/mssql
+
+# Grant sql the permissions to connect to ports <1024 as a non-root user
+#
+RUN setcap 'cap_net_bind_service+ep' /opt/mssql/bin/sqlservr
+
+# Add an ldconfig file because setcap causes the os to remove LD_LIBRARY_PATH
+# and other env variables that control dynamic linking
+#
+RUN mkdir -p /etc/ld.so.conf.d && touch /etc/ld.so.conf.d/mssql.conf
+RUN echo -e "# mssql libs\n/opt/mssql/lib" >> /etc/ld.so.conf.d/mssql.conf
+RUN ldconfig
+
+USER mssql
 
 # Default SQL Server TCP/Port
 
