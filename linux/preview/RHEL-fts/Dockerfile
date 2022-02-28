@@ -59,12 +59,12 @@ RUN yum clean all
 
 # # Default SQL Server TCP/Port
 
-# EXPOSE 1433
+EXPOSE 1433
 
-# VOLUME /var/opt/mssql/data
+VOLUME /var/opt/mssql/data
 
 # ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
 
 # ENTRYPOINT [ "uid_entrypoint" ]
 
-# CMD /opt/mssql/bin/sqlservr
+CMD /opt/mssql/bin/sqlservr
