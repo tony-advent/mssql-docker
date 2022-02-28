@@ -4,11 +4,12 @@
 
 FROM mcr.microsoft.com/mssql/rhel/server:2019-latest
 
+
 USER root
 
 # Install prerequistes since it is needed to get repo config for SQL server
 
-RUN dnf -y update
+# RUN dnf -y update
 
 # RUN yum install -y sudo
 
@@ -22,7 +23,7 @@ RUN dnf -y update
 
 # RUN yum install -y mssql-server
 
-# # RUN yum install -y mssql-server-fts
+RUN yum install -y mssql-server-fts
 
 # RUN ACCEPT_EULA=Y yum install -y msodbcsql18
 
