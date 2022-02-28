@@ -8,7 +8,7 @@ USER root
 
 # Install prerequistes since it is needed to get repo config for SQL server
 
-RUN yum -y update
+RUN dnf -y update
 
 # RUN yum install -y sudo
 
