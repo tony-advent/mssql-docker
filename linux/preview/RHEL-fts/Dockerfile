@@ -67,4 +67,4 @@ VOLUME /var/opt/mssql/data
 
 # ENTRYPOINT [ "uid_entrypoint" ]
 
-CMD systemctl restart mssql-server
+CMD /opt/mssql/bin/sqlservr
